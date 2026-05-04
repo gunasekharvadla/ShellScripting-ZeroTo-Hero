@@ -1,0 +1,197 @@
+<div align="center">
+
+# ➕ Day 04 — Operators in Shell Scripting
+
+![Bash](https://img.shields.io/badge/Bash-Operators-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Math](https://img.shields.io/badge/Arithmetic-Logic-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=for-the-badge)
+
+> *"Operators are the building blocks of logic — without them, scripts can't think or calculate."*
+
+</div>
+
+---
+
+## 📌 Introduction
+
+**Operators** perform operations on variables and values. Shell scripting supports arithmetic, relational, and logical operators — together they enable your scripts to compute, compare, and decide.
+
+---
+
+## 🧠 Key Concepts
+
+### Types of Operators
+
+```mermaid
+flowchart TD
+    O["⚙️ Shell Operators"] --> A["➕ Arithmetic\n+ · - · * · / · %"]
+    O --> R["🔁 Relational / Comparison\n== · != · -gt · -lt · -ge · -le"]
+    O --> L["🔗 Logical\n&& · || · !"]
+
+    style O fill:#3498DB,color:#fff
+    style A fill:#4EAA25,color:#fff
+    style R fill:#E74C3C,color:#fff
+    style L fill:#9B59B6,color:#fff
+```
+
+---
+
+## 💻 Arithmetic Operators
+
+| Operator | Symbol | Example | Result |
+|---|---|---|---|
+| Addition | `+` | `$((10+5))` | `15` |
+| Subtraction | `-` | `$((10-5))` | `5` |
+| Multiplication | `*` | `$((10*5))` | `50` |
+| Division | `/` | `$((10/5))` | `2` |
+| Modulus | `%` | `$((10%3))` | `1` |
+
+### Syntax
+
+```bash
+# Arithmetic expression syntax
+result=$((expression))
+
+# Examples
+echo $((10 + 20))    # 30
+echo $((10 * 5))     # 50
+echo $((17 % 3))     # 2
+```
+
+---
+
+### Script — Addition of Two Numbers
+
+```bash
+#!/bin/bash
+
+echo "Enter first number"
+read FNUM
+
+echo "Enter second number"
+read SNUM
+
+echo "Sum        : $((FNUM + SNUM))"
+echo "Difference : $((FNUM - SNUM))"
+echo "Product    : $((FNUM * SNUM))"
+echo "Division   : $((FNUM / SNUM))"
+echo "Modulus    : $((FNUM % SNUM))"
+```
+
+---
+
+## 🔁 Relational / Comparison Operators
+
+Used in conditions (inside `[ ]` brackets):
+
+| Operator | Meaning | Numeric | String |
+|---|---|---|---|
+| Equal | Equals | `-eq` | `==` |
+| Not Equal | Not equals | `-ne` | `!=` |
+| Greater Than | Greater | `-gt` | `>` |
+| Less Than | Lesser | `-lt` | `<` |
+| Greater or Equal | GTE | `-ge` | `>=` |
+| Less or Equal | LTE | `-le` | `<=` |
+
+```bash
+#!/bin/bash
+
+A=15
+B=20
+
+if [ $A -eq $B ]; then
+  echo "A equals B"
+elif [ $A -gt $B ]; then
+  echo "A is greater"
+else
+  echo "B is greater"
+fi
+```
+
+---
+
+## 🔗 Logical Operators
+
+| Operator | Symbol | Meaning |
+|---|---|---|
+| AND | `&&` | Both conditions true |
+| OR | `\|\|` | At least one condition true |
+| NOT | `!` | Negates condition |
+
+```bash
+#!/bin/bash
+
+AGE=25
+INCOME=50000
+
+# AND condition
+if [ $AGE -ge 18 ] && [ $INCOME -ge 30000 ]; then
+  echo "Eligible for loan"
+else
+  echo "Not eligible"
+fi
+```
+
+---
+
+## 🌍 Real-World Usage
+
+```mermaid
+flowchart TD
+    A["Check Disk Usage\n$(df -h | awk '{print $5}')"] --> B{Usage > 80%?}
+    B -- Yes --> C["Send Alert Email"]
+    B -- No --> D["Log: Disk OK"]
+
+    style B fill:#F7931E,color:#fff
+    style C fill:#E74C3C,color:#fff
+    style D fill:#4EAA25,color:#fff
+```
+
+```bash
+#!/bin/bash
+# Real-world: Disk usage alert script
+
+USAGE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')
+THRESHOLD=80
+
+echo "Current Disk Usage: $USAGE%"
+
+if [ $USAGE -ge $THRESHOLD ]; then
+  echo "⚠️  WARNING: Disk usage is above ${THRESHOLD}%!"
+else
+  echo "✅ Disk usage is normal."
+fi
+```
+
+---
+
+## 📋 Summary
+
+| Operator Type | Purpose | Syntax Example |
+|---|---|---|
+| **Arithmetic** | Math calculations | `$((A + B))` |
+| **Relational** | Numeric comparison | `[ $A -gt $B ]` |
+| **String Compare** | String equality | `[ "$A" == "$B" ]` |
+| **Logical AND** | Both must be true | `[ cond1 ] && [ cond2 ]` |
+| **Logical OR** | Either must be true | `[ cond1 ] \|\| [ cond2 ]` |
+
+---
+
+## ⏭️ What's Next?
+
+> 🔜 **Day 05 — Conditional Statements (if-elif-else)**
+> Make your scripts smart — add decision-making with conditions!
+
+---
+
+## 👨‍💻 Author & Support
+
+<div align="center">
+
+Made with ❤️ as part of the **DevOps Zero to Hero** series
+
+
+⭐ **Star this repo** if it helped you!
+
+</div>
